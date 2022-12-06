@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" style="--bs-body-bg: 161e2d;">
 
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -11,6 +12,8 @@
 </head>
 
 <body class="flex-shrink-0" style="--bs-body-bg: #212529;">
+    <script src="pdf.js"></script>
+    <script src="pdf.worker.js"></script>
     <nav class="navbar navbar-light navbar-expand-md">
         <div class="container-fluid"><img src="assets/img/vibilogo.png" width="80" height="80" style="margin: 34px;"><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
@@ -35,6 +38,8 @@
                         <h4 class="card-title" style="text-align: center;">Step 1</h4>
                         <p class="card-text" style="text-align: center;">Upload your image</p>
                         <div id="imagePreview"></div>
+                        <div><canvas id="pdf-preview" width="150" style="text-align: center;"></canvas></div>
+                        
                         <input type="file" id="file" accept=".pdf, image/*" style="color: #000000;text-align: center;margin: 8px; width: 41%;" onchange="return fileValidation(file)">
                         <button class="btn btn-primary d-flex d-xxl-flex align-items-center mx-auto justify-content-xxl-center align-items-xxl-center" type="submit" style="margin: 8px;">Upload</button>
                     </div>
@@ -51,6 +56,8 @@
         </div>
     </div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+
+
 </body>
 
 </html>
