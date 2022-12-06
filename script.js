@@ -6,7 +6,7 @@ function fileValidation(file) {
  
     // Allowing file type
     var allowedExtensions =
-            /(\.jpg|\.jpeg|\.png)$/i;
+            /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
      
     if (!allowedExtensions.exec(filePath)) {
         alert('Please input PDF, PNG, JPEG, JPG format file');
