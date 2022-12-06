@@ -22,12 +22,14 @@ function fileValidation(file) {
         // Image preview
         if (fileInput.files && fileInput.files[0]) {
             if(fileInput.value.split('.').pop() == "pdf"){
+                document.querySelector('#pdf-preview').width = 150;
+                document.querySelector('#imagePreview').style.display = 'none';
                 _OBJECT_URL = URL.createObjectURL(fileInput.files[0]);
                 showPDF(_OBJECT_URL);
             }
             else{
-                document.querySelector('#pdf-preview').width = 0;
                 document.querySelector('#pdf-preview').height = 0;
+                document.querySelector('#imagePreview').style.display = 'inline-block';
                 var reader = new FileReader();
                 reader.onload = function(e) {
                     document.getElementById(
