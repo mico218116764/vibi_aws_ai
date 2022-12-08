@@ -8,7 +8,18 @@
     <title>AWS Textract Demo</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&amp;display=swap">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="script.js"></script>
+    <script>
+        $(document).ready(function name() {
+           $("#btnSubmit").click(function name() {
+                $("#resultTA").append("data.txt");
+           })
+           $("#file").click(function name() {
+                $("#resultTA").val('');
+           })
+        });
+    </script>
 </head>
 
 <body class="flex-shrink-0" style="--bs-body-bg: #212529;">
@@ -41,7 +52,7 @@
                         <div><canvas id="pdf-preview" width="0" height="0" style="text-align: center;"></canvas></div>
                         
                         <input type="file" id="file" accept=".pdf, image/*" style="color: #000000;text-align: center;margin: 8px; width: 41%;" onchange="return fileValidation(file)">
-                        <button class="btn btn-primary d-flex d-xxl-flex align-items-center mx-auto justify-content-xxl-center align-items-xxl-center" type="submit" style="margin: 8px;">Upload</button>
+                        <button class="btn btn-primary d-flex d-xxl-flex align-items-center mx-auto justify-content-xxl-center align-items-xxl-center" type="button" id="btnSubmit" style="margin: 8px;">Upload</button>
                     </div>
                 </div>
             </div>
@@ -49,7 +60,8 @@
                 <div class="card d-flex flex-row align-items-center align-self-center m-auto" style="margin-left: 40px;width: 100%;height: 100%;">
                     <div class="card-body">
                         <h4 class="card-title" style="text-align: center;">Result</h4>
-                        <p class="card-text" style="text-align: center;">Your result will be seen here</p><textarea class="form-control-lg d-flex mx-auto" style="text-align: center;" readonly=""></textarea>
+                        <p class="card-text" style="text-align: center;">Your result will be seen here</p>
+                        <textarea class="form-control-lg d-flex mx-auto" style="text-align: center;" readonly="" id="resultTA"></textarea>
                     </div>
                 </div>
             </div>
