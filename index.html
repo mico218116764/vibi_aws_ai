@@ -25,11 +25,8 @@
             var fd = new FormData();
             var files = $('#file')[0].files;
 
-            $.ajax({
-                url: 'https://ih3t0x85re.execute-api.us-east-1.amazonaws.com/dev/na-admin-textract-async/async-doc-text/'+filename,
-                headers: {
-                    'Access-Control-Allow-Origin': '*'
-                },
+            $.ajax({    
+                url: '/async-doc-text/'+filename,
                 type: 'put',
                 data: fd,
                 contentType: false,
