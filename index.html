@@ -42,7 +42,7 @@
 
             $.ajax({
                 type: 'GET',
-                dataType:"jsonp",
+                dataType:"json",
                 url: 'https://00puc9uf00.execute-api.us-east-1.amazonaws.com/getTextractOutput?filename=ming-bon1.jpg',
                 success: function (data, status, xhr) {
                     console.log('data: ', data);
