@@ -25,31 +25,33 @@
             var fd = new FormData();
             var files = $('#file')[0].files;
 
-        //     $.ajax({
-        //       url: 'https://ih3t0x85re.execute-api.us-east-1.amazonaws.com/dev/na-admin-textract-async/async-doc-text/'+filename,
-        //       type: 'put',
-        //       data: fd,
-        //       contentType: false,
-        //       processData: false,
-        //       success: function(response){
-        //          if(response != 0){
-        //             alert('file '+filename+' has been uploaded');
-        //          }else{
-        //             alert('file not uploaded');
-        //          }
-        //       },
-        //    });
+            $.ajax({
+                url: 'https://ih3t0x85re.execute-api.us-east-1.amazonaws.com/dev/na-admin-textract-async/async-doc-text/'+filename,
+                headers: {
+                    'Access-Control-Allow-Origin': '*'
+                },
+                type: 'put',
+                data: fd,
+                contentType: false,
+                processData: false,
+                success: function(response){
+                    if(response != 0){
+                        alert('file '+filename+' has been uploaded');
+                    }else{
+                        alert('file not uploaded');
+                    }
+                },
+            });
 
-        $.ajax({
-            type: 'GET',
-            dataType:"jsonp",
-            url: 'https://00puc9uf00.execute-api.us-east-1.amazonaws.com/getTextractOutput?filename=ming-bon1.jpg',
-            success: function (data, status, xhr) {
-                console.log('data: ', data);
-            }
-        });
-
-            $('#resultTA').append("Result");
+            $.ajax({
+                type: 'GET',
+                dataType:"jsonp",
+                url: 'https://00puc9uf00.execute-api.us-east-1.amazonaws.com/getTextractOutput?filename=ming-bon1.jpg',
+                success: function (data, status, xhr) {
+                    console.log('data: ', data);
+                    $('#resultTA').append(data); 
+                }
+            });    
             
         }
         $(document).ready(function name() {
@@ -60,7 +62,6 @@
                 eraseText();
            })
         });
-
     </script>
 </head>
 
