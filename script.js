@@ -2,6 +2,9 @@ var _PDF_DOC,
 _CANVAS = document.querySelector('#pdf-preview'),
 _OBJECT_URL;
 
+AWS.config.region = 'REGION';
+AWS.config.credentials = new AWS.CognitoIdentityCredentials({IdentityPoolId: 'IDENTITY_POOL_ID'});
+
 
 function fileValidation(file) {
     var fileInput =

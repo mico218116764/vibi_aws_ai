@@ -10,56 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&amp;display=swap">
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="script.js"></script>
-    <script>
-        function eraseText() {
-            $("#resultTA").text('');
-        }
-        function addData() {
-            var fullPath  =  document.getElementById('file').value;
-            var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
-            var filename = fullPath.substring(startIndex);
-            if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
-                filename = filename.substring(1);
-            }
-            // alert(filename);
-            var fd = new FormData();
-            var files = $('#file')[0].files;
-
-            $.ajax({    
-                url: '/async-doc-text/'+filename,
-                type: 'put',
-                data: fd,
-                contentType: false,
-                processData: false,
-                success: function(response){
-                    if(response != 0){
-                        alert('file '+filename+' has been uploaded');
-                    }else{
-                        alert('file not uploaded');
-                    }
-                },
-            });
-
-            $.ajax({
-                type: 'GET',
-                dataType:"json",
-                url: 'https://00puc9uf00.execute-api.us-east-1.amazonaws.com/getTextractOutput?filename=ming-bon1.jpg',
-                success: function (data, status, xhr) {
-                    console.log('data: ', data);
-                    $('#resultTA').append(data); 
-                }
-            });    
-            
-        }
-        $(document).ready(function name() {
-           $("#btnSubmit").click(function name() {
-                addData();
-           })
-           $("#file").click(function name() {
-                eraseText();
-           })
-        });
-    </script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1284.0.min.js"></script>
 </head>
 
 <body class="flex-shrink-0" style="--bs-body-bg: #212529;">
@@ -109,8 +60,6 @@
         </div>
     </div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-
-
 </body>
 
 </html>
