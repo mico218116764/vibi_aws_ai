@@ -3,8 +3,31 @@ _CANVAS = document.querySelector('#pdf-preview'),
 _OBJECT_URL;
 
 AWS.config.region = 'REGION';
+var bucketName = BUCKET_NAME;
 AWS.config.credentials = new AWS.CognitoIdentityCredentials({IdentityPoolId: 'IDENTITY_POOL_ID'});
 
+function uploadS3(){
+    var files = document.getElementById('fileUpload').files;
+    if (files) {
+        var file = files[0];
+        var fileName = file.name;
+        var filePath = 'my-first-bucket-path/' + fileName;
+        var fileUrl = 'https://' + bucketRegion + '.amazonaws.com/my-    first-bucket/' +  filePath;
+        s3.upload({
+            Key: filePath,
+            Body: file,
+            ACL: 'public-read'
+            }, function(err, data) {
+            if(err) {
+            reject('error');
+            }
+            alert('Successfully Uploaded!');
+            }).on('httpUploadProgress', function (progress) {
+            var uploaded = parseInt((progress.loaded * 100) / progress.total);
+            $("progress").attr('value', uploaded);
+        });
+    }
+}
 
 function fileValidation(file) {
     var fileInput =
@@ -92,11 +115,6 @@ function showPage(page_no) {
     });
 }
 
-
-
-
-
-
 /* Selected File has changed */
 document.querySelector("#file").addEventListener('change', function() {
     // user selected file
@@ -113,6 +131,3 @@ document.querySelector("#file").addEventListener('change', function() {
     // send the object url of the pdf to the PDF preview function
     showPDF(_OBJECT_URL);
 });
-
-
-
