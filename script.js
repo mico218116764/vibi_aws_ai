@@ -2,30 +2,60 @@ var _PDF_DOC,
 _CANVAS = document.querySelector('#pdf-preview'),
 _OBJECT_URL;
 
-AWS.config.region = 'REGION';
-var bucketName = BUCKET_NAME;
-AWS.config.credentials = new AWS.CognitoIdentityCredentials({IdentityPoolId: 'IDENTITY_POOL_ID'});
+// Load the required clients and packages
+const { CognitoIdentityClient } = require("@aws-sdk/client-cognito-identity");
+const { fromCognitoIdentityPool } = require("@aws-sdk/credential-provider-cognito-identity");
+const { S3Client } = require("@aws-sdk/client-s3");
+
+// Set the AWS Region
+const REGION = "us-east-1"; //REGION
+
+// Initialize the Amazon Cognito credentials provider
+const s3 = new S3Client({
+  region: REGION,
+  credentials: fromCognitoIdentityPool({
+    client: new CognitoIdentityClient({ region: REGION }),
+    identityPoolId: "us-east-1:be360f48-ec2e-4495-8934-ea2deb1e7432", // IDENTITY_POOL_ID
+  }),
+});
+
+const bucketName = "ricky-test-bucket-1"; //BUCKET_NAME
+
+// //v2
+// AWS.config.region = 'REGION';
+// var bucketName = BUCKET_NAME;
+// AWS.config.credentials = new AWS.CognitoIdentityCredentials({IdentityPoolId: 'IDENTITY_POOL_ID'});
 
 function uploadS3(){
     var files = document.getElementById('fileUpload').files;
     if (files) {
         var file = files[0];
         var fileName = file.name;
-        var filePath = 'my-first-bucket-path/' + fileName;
+        var filePath = 'Textract/upload/' + fileName;
         var fileUrl = 'https://' + bucketRegion + '.amazonaws.com/my-    first-bucket/' +  filePath;
-        s3.upload({
+        s3.putObject({
             Key: filePath,
             Body: file,
             ACL: 'public-read'
             }, function(err, data) {
-            if(err) {
-            reject('error');
-            }
-            alert('Successfully Uploaded!');
+                if(err) {
+                    reject('error');
+                }
+                alert('Successfully Uploaded!');
             }).on('httpUploadProgress', function (progress) {
-            var uploaded = parseInt((progress.loaded * 100) / progress.total);
-            $("progress").attr('value', uploaded);
-        });
+                var uploaded = parseInt((progress.loaded * 100) / progress.total);
+                $("progress").attr('value', uploaded);
+            });
+        (async () => {
+            try {
+              const file = await s3
+                .getObject({ Bucket: 'BUCKET-NAME', Key: 'path/to/your/file' })
+                .promise();
+              console.log(file.Body);
+            } catch (err) {
+              console.log(err);
+            }
+        })();
     }
 }
 
